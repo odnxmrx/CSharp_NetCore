@@ -20,16 +20,28 @@ operatorSymbol = char.Parse(Console.ReadLine()); //convert to str to char
 switch (operatorSymbol)
 {
     case '+':
-        result = operand1 + operand2;
+        checked
+        {
+            result = operand1 + operand2;
+        }
         break;
     case '-':
-        result = operand1 - operand2;
+        checked
+        {
+            result = operand1 - operand2;
+        }
         break;
     case '*':
-        result = operand1 * operand2;
+        checked // force the CLR to perform overflow checks by this 'Int' vals
+        {
+            result = operand1 * operand2;
+        }
         break;
     case '/':
+        checked
+        {
         result = operand1 / operand2;
+        }
         break;
     default:
         break;
@@ -37,4 +49,4 @@ switch (operatorSymbol)
 
 Console.WriteLine();
 Console.WriteLine($"{operand1} {operatorSymbol} {operand2} = {result} ");
-Console.WriteLine();
+Console.ReadKey(); //Esperar por user input
