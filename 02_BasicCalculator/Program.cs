@@ -10,7 +10,6 @@ Console.WriteLine("-----------------");
 
 try
 {
-        
     Console.WriteLine("Please, enter a whole number (first operand):");
     operand1 = int.Parse(Console.ReadLine()); //parse to Integer 
 
@@ -27,8 +26,13 @@ try
     Console.WriteLine($"{operand1} {operatorSymbol} {operand2} = {result} ");
 }
 catch(CalculationResultOverflowException ex)
+// ex -> pasa a es el  error lanzado ('CalculationResultOverflowException(ex.Message, ex)')
+// del 'Calculate' method.
 {
     Console.WriteLine();
+    //The original overflow exception is stored in the innerException prop (a string). of the 'ex' obj.
+    Console.WriteLine($"Inner Exception (IE): {ex.InnerException?.Message}");
+    //? -> prevent 'null' exception from being thrown
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Red;
     //Console.WriteLine(ex.Message);
@@ -120,7 +124,7 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     }
     catch (OverflowException ex) //out of value range
     {
-        throw new CalculationResultOverflowException();
+        throw new CalculationResultOverflowException(ex.Message, ex);
     }
     return result;
 }
