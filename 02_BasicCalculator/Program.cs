@@ -118,13 +118,26 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
                 result = operand1 / operand2;
                 }
                 break;
-            default:
-                break;
+            default: //faltaría manejar error para el 'OperandSymbol'
+                throw new InvalidOperationException();
         }
     }
     catch (OverflowException ex) //out of value range
     {
         throw new CalculationResultOverflowException(ex.Message, ex);
+    }
+    catch(InvalidOperationException ex)
+    {
+        throw new ArgumentException($"{nameof(operatorSymbol)} is invalid.");
+        /*
+        the msj passed to this CTOR, includes a 'nameof' method -> it has passed one of the param names
+        included in the Calculate methods signature.
+        nameof -> included in C# 6
+        */
+    }
+    catch(DivideByZeroException ex)
+    {
+        throw new ArgumentException($"{nameof(operand2)} cannot be 0 with divide operation");
     }
     return result;
 }
