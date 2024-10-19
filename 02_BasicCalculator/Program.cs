@@ -54,7 +54,7 @@ catch (DivideByZeroException ex)
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(ex.Message);
-    Console.WriteLine("For a division, the 2nd operand cannot be '0'.");
+    Console.WriteLine("For  'division' operation, the 2nd operand cannot be of '0'.");
     Console.ResetColor();
 }
 catch (ArithmeticException ex)
@@ -137,7 +137,7 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     }
     catch(DivideByZeroException ex)
     {
-        throw new ArgumentException($"{nameof(operand2)} cannot be 0 with divide operation");
+        throw new ArgumentException($"{nameof(operand2)} cannot be '0' with divide operation");
     }
     return result;
 }
