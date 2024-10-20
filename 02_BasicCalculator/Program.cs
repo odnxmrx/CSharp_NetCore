@@ -48,15 +48,15 @@ catch (OverflowException ex) //Entering out of range values for Int datatypes
     Console.WriteLine("This value is either too big or too small for an Integer value.");
     Console.ResetColor();
 }
-catch (DivideByZeroException ex)
-{
-    Console.WriteLine();
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(ex.Message);
-    Console.WriteLine("For  'division' operation, the 2nd operand cannot be of '0'.");
-    Console.ResetColor();
-}
+// catch (DivideByZeroException ex)
+// {
+//     Console.WriteLine();
+//     Console.BackgroundColor = ConsoleColor.White;
+//     Console.ForegroundColor = ConsoleColor.Red;
+//     Console.WriteLine(ex.Message);
+//     Console.WriteLine("For  'division' operation, the 2nd operand cannot be of '0'.");
+//     Console.ResetColor();
+// }
 catch (ArithmeticException ex)
 {
     //Console.Clear(); //Clear Console to display Error Msg
@@ -75,6 +75,15 @@ catch (FormatException ex)
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(ex.Message); //Error Msg from Exception
     //Console.WriteLine("input value is invalid");
+    Console.ResetColor();
+}
+catch(ArgumentException ex)
+{
+    Console.WriteLine();
+    Console.BackgroundColor = ConsoleColor.White;
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(ex.Message);
+    Console.WriteLine("Eror: Input value is invalid.");
     Console.ResetColor();
 }
 finally
@@ -128,11 +137,13 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     }
     catch(InvalidOperationException ex)
     {
-        throw new ArgumentException($"{nameof(operatorSymbol)} is invalid.");
+        throw new ArgumentException($"{nameof(operatorSymbol)} is invalid."); //nameof(operand2) retornaría el op2 as string
         /*
         the msj passed to this CTOR, includes a 'nameof' method -> it has passed one of the param names
         included in the Calculate methods signature.
         nameof -> included in C# 6
+            ADVANTAGE: if we change the name of the parameter in the Calculate methods signature
+            a compile time error would be flagged; forcing us to rename the relevant param. passed
         */
     }
     catch(DivideByZeroException ex)
