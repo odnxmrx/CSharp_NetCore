@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using _02_BasicCalculator;
 
 int operand1, operand2;
 int result = 0; //initialized (final log purpose)
 char operatorSymbol;
+
+//Const con nombre de los params de Calculate
+const string operator_Symbol = "OPERATORSYMBOL";
+const string operand_1 = "OPERAND1";
+const string operand_2 = "OPERAND2";
+
 
 Console.WriteLine("Basic Calculator");
 Console.WriteLine("-----------------");
@@ -82,7 +89,7 @@ catch(ArgumentException ex)
     Console.WriteLine();
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(ex.Message);
+    //Console.WriteLine(ex.Message); // xx 'is invalid.'
     Console.WriteLine("Eror: Input value is invalid.");
     Console.ResetColor();
 }
@@ -137,7 +144,7 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     }
     catch(InvalidOperationException ex)
     {
-        throw new ArgumentException($"{nameof(operatorSymbol)} is invalid."); //nameof(operand2) retornaría el op2 as string
+        throw new ArgumentException($"{nameof(operatorSymbol)} is invalid.",operator_Symbol,ex); //nameof(operand2) retornaría el op2 as string
         /*
         the msj passed to this CTOR, includes a 'nameof' method -> it has passed one of the param names
         included in the Calculate methods signature.
@@ -148,7 +155,18 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     }
     catch(DivideByZeroException ex)
     {
-        throw new ArgumentException($"{nameof(operand2)} cannot be '0' with divide operation");
-    }
+        throw new ArgumentException($"{nameof(operand2)} cannot be '0' with divide operation",operand_2,ex);
+    } // Other: Argument out of range exception (class)
     return result;
+}
+
+//Generic method to write msg in console
+static void WriteExceptionMessageToScreen(string message)
+{
+    Console.WriteLine();
+    Console.BackgroundColor = ConsoleColor.White;
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(message); // specific 
+    Console.WriteLine("Eror: Input value is invalid.");
+    Console.ResetColor();
 }
