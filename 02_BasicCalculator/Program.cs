@@ -86,12 +86,13 @@ catch (FormatException ex)
 }
 catch(ArgumentException ex)
 {
-    Console.WriteLine();
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
-    //Console.WriteLine(ex.Message); // xx 'is invalid.'
-    Console.WriteLine("Eror: Input value is invalid.");
-    Console.ResetColor();
+    WriteArgumentExceptionToScreen(ex); //eval which param caused the exception and throw its message
+    // Console.WriteLine();
+    // Console.BackgroundColor = ConsoleColor.White;
+    // Console.ForegroundColor = ConsoleColor.Red;
+    // //Console.WriteLine(ex.Message); // xx 'is invalid.'
+    // Console.WriteLine("Eror: Input value is invalid.");
+    // Console.ResetColor();
 }
 finally
 {
@@ -160,6 +161,23 @@ static int Calculate(int operand1, int operand2, char operatorSymbol) //int valu
     return result;
 }
 
+//Evaluate the param names of the args excep thrown; based on param name, we can print a specific message:
+static void WriteArgumentExceptionToScreen(ArgumentException ex)
+{
+    string errorMessage = null;
+
+    if(ex?.ParamName.ToUpper() == operator_Symbol) //Evaluate the param entered
+    {
+        errorMessage = "Invalid operator sym was entered. Operators allowed: +, -, *, /";
+    }
+    else if (ex.ParamName.ToUpper() == operand_2)
+    {
+        errorMessage = "A value of 0 was entered for the 2nd operand. This value cannot be 0 when executing a divide operation.";
+    }
+    WriteExceptionMessageToScreen(errorMessage);
+}
+
+
 //Generic method to write msg in console
 static void WriteExceptionMessageToScreen(string message)
 {
@@ -167,6 +185,6 @@ static void WriteExceptionMessageToScreen(string message)
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(message); // specific 
-    Console.WriteLine("Eror: Input value is invalid.");
+    //Console.WriteLine("Eror: Input value is invalid.");
     Console.ResetColor();
 }
