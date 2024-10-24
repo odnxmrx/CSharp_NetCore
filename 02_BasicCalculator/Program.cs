@@ -36,7 +36,7 @@ catch(CalculationResultOverflowException ex)
 // ex -> pasa a es el  error lanzado ('CalculationResultOverflowException(ex.Message, ex)')
 // del 'Calculate' method.
 {
-    WriteExceptionMessageToScreen($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue})."));
+    WriteExceptionMessageToScreen($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue}).");
 }
 catch (OverflowException ex) //Entering out of range values for Int datatypes
 {
