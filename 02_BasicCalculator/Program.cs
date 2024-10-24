@@ -36,24 +36,11 @@ catch(CalculationResultOverflowException ex)
 // ex -> pasa a es el  error lanzado ('CalculationResultOverflowException(ex.Message, ex)')
 // del 'Calculate' method.
 {
-    Console.WriteLine();
-    //The original overflow exception is stored in the innerException prop (a string). of the 'ex' obj.
-    Console.WriteLine($"Inner Exception (IE): {ex.InnerException?.Message}");
-    //? -> prevent 'null' exception from being thrown
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
-    //Console.WriteLine(ex.Message);
-    Console.WriteLine($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue}).");
-    Console.ResetColor();
+    WriteExceptionMessageToScreen($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue})."));
 }
 catch (OverflowException ex) //Entering out of range values for Int datatypes
 {
-    Console.WriteLine();
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(ex.Message);
-    Console.WriteLine("This value is either too big or too small for an Integer value.");
-    Console.ResetColor();
+    WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})")
 }
 // catch (DivideByZeroException ex)
 // {
@@ -77,22 +64,11 @@ catch (ArithmeticException ex)
 }
 catch (FormatException ex)
 {
-    Console.WriteLine();
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(ex.Message); //Error Msg from Exception
-    //Console.WriteLine("input value is invalid");
-    Console.ResetColor();
+    WriteExceptionMessageToScreen("input value is invalid");
 }
 catch(ArgumentException ex)
 {
     WriteArgumentExceptionToScreen(ex); //eval which param caused the exception and throw its message
-    // Console.WriteLine();
-    // Console.BackgroundColor = ConsoleColor.White;
-    // Console.ForegroundColor = ConsoleColor.Red;
-    // //Console.WriteLine(ex.Message); // xx 'is invalid.'
-    // Console.WriteLine("Eror: Input value is invalid.");
-    // Console.ResetColor();
 }
 finally
 {
