@@ -36,11 +36,20 @@ catch(CalculationResultOverflowException ex)
 // ex -> pasa a es el  error lanzado ('CalculationResultOverflowException(ex.Message, ex)')
 // del 'Calculate' method.
 {
+    Logger.Log(ex.StackTrace); 
+    /*
+    No es necesario instanciar 'Logger', pues es 'static'
+    En excepción de out-of-range, the Stack Trace information for this excep obj, will be captured in log file.
+
+    Stack Trace -> contains info about files containing our code, and
+        the lines of code traversed when the stack unwinds as a result of an exception occurring
+    */
+
     WriteExceptionMessageToScreen($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue}).");
 }
 catch (OverflowException ex) //Entering out of range values for Int datatypes
 {
-    WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})")
+    WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})");
 }
 // catch (DivideByZeroException ex)
 // {

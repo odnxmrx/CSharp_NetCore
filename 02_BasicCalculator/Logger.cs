@@ -25,7 +25,9 @@ public static class Logger
         // 2nd param is Bool: true -> append, false-> overwrite
         // ** Si no existiera, lo crea
         
-        _logFile.WriteLine(DateTime.Now.ToString() + ": " + textToLog); //Log text to txt
+        _logFile.WriteLine("[" +DateTime.Now.ToString() + "]: " + textToLog); //Log text to txt
+
+        _logFile.Close(); //close file
 
     }
 }
