@@ -51,15 +51,6 @@ catch (OverflowException ex) //Entering out of range values for Int datatypes
 {
     WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})");
 }
-// catch (DivideByZeroException ex)
-// {
-//     Console.WriteLine();
-//     Console.BackgroundColor = ConsoleColor.White;
-//     Console.ForegroundColor = ConsoleColor.Red;
-//     Console.WriteLine(ex.Message);
-//     Console.WriteLine("For  'division' operation, the 2nd operand cannot be of '0'.");
-//     Console.ResetColor();
-// }
 catch (ArithmeticException ex)
 {
     //Console.Clear(); //Clear Console to display Error Msg
