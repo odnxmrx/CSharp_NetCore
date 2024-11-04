@@ -36,7 +36,7 @@ catch(CalculationResultOverflowException ex)
 // ex -> pasa a es el  error lanzado ('CalculationResultOverflowException(ex.Message, ex)')
 // del 'Calculate' method.
 {
-    Logger.Log(ex.StackTrace); 
+    //Logger.Log(ex.StackTrace); //1st version of Logger
     /*
     No es necesario instanciar 'Logger', pues es 'static'
     En excepción de out-of-range, the Stack Trace information for this excep obj, will be captured in log file.
@@ -44,11 +44,17 @@ catch(CalculationResultOverflowException ex)
     Stack Trace -> contains info about files containing our code, and
         the lines of code traversed when the stack unwinds as a result of an exception occurring
     */
+    Logger.Log(ex, LogType.Verbose); // call overload method
+    /*
+    1st arg -> cought ex
+    2nd arg -> verbose logging
+    */
 
     WriteExceptionMessageToScreen($"The desired result is our of range for an Integer value (i.e. between {Int32.MinValue} and {Int32.MaxValue}).");
 }
 catch (OverflowException ex) //Entering out of range values for Int datatypes
 {
+    Logger.Log(ex, LogType.Verbose);
     WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})");
 }
 catch (ArithmeticException ex)
@@ -64,10 +70,12 @@ catch (ArithmeticException ex)
 }
 catch (FormatException ex)
 {
+    Logger.Log(ex, LogType.Verbose);
     WriteExceptionMessageToScreen("input value is invalid");
 }
 catch(ArgumentException ex)
 {
+    Logger.Log(ex, LogType.Verbose);
     WriteArgumentExceptionToScreen(ex); //eval which param caused the exception and throw its message
 }
 finally

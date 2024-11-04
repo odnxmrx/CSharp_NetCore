@@ -24,8 +24,8 @@ public static class Logger
         try
         {
             //Make loge file read-only
-            FileInfo fi = new FileInfo(_logPath + "basicCalculatorLog.txt");
-            fi.IsReadOnly = false; //true;
+            // FileInfo fi = new FileInfo(_logPath + "basicCalculatorLog.txt");
+            // fi.IsReadOnly = false; //true;
 
             //instancia de obj de tipo StreamWriter
             _logFile = new StreamWriter(_logPath + "basicCalculatorLog.txt", true);
@@ -51,21 +51,34 @@ public static class Logger
     //overload method
     public static void Log(Exception ex, LogType logtype) // Log ex on file depending on LogType enum:
     { 
-        _logFile = new StreamWriter(_logPath + "basicCalculatorLog.txt", true);
-
-        //Evaluate value passed into LogType param
-        if(logtype == LogType.Basic)
+        try
         {
-            _logFile.WriteLine($"[{DateTime.Now}]:, Exception Name: ${ex.GetType().Name} - Exception Message: {ex.Message}");
-        }
-        else if(logtype == LogType.Verbose)
-        {
-            _logFile.WriteLine($"[{DateTime.Now}]:, Exception Name: ${ex.GetType().Name} - Exception Message: {ex.Message}, InnerException Message: {ex.InnerException?.Message} - Stack Trace: {ex.StackTrace}");
+            _logFile = new StreamWriter(_logPath + "basicCalculatorLog.txt", true);
 
-            if(ex is ArgumentException) //ALSO log param name of the arg causing the Ex
+            //Evaluate value passed into LogType param
+            if(logtype == LogType.Basic)
             {
-                _logFile.Write($", ParamName: {((ArgumentException)ex).ParamName}");
+                _logFile.WriteLine($"[{DateTime.Now}]:, Exception Name: ${ex.GetType().Name} - Exception Message: {ex.Message}");
             }
+            else if(logtype == LogType.Verbose)
+            {
+                _logFile.WriteLine($"[{DateTime.Now}]:, Exception Name: ${ex.GetType().Name} - Exception Message: {ex.Message}, InnerException Message: {ex.InnerException?.Message} - Stack Trace: {ex.StackTrace}");
+
+                if(ex is ArgumentException) //ALSO log param name of the arg causing the Ex
+                {
+                    _logFile.Write($", ParamName: {((ArgumentException)ex).ParamName}");
+                }
+            }
+        }
+        catch (UnauthorizedAccessException exeption)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Warning: " +  exeption.Message); // access denied message
+            Console.ResetColor();
+        }
+        finally
+        {
+            _logFile?.Close(); //MUST close file, so text is written
         }
     }
 }
