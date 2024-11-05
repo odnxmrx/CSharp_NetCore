@@ -18,10 +18,10 @@ Console.WriteLine("-----------------");
 try
 {
     Console.WriteLine("Please, enter a whole number (first operand):");
-    operand1 = int.Parse(Console.ReadLine()); //parse to Integer 
+    operand1 = ValidateOperandInput(); //int.Parse(Console.ReadLine()); //parse to Integer 
 
     Console.WriteLine("Please, enter a whole number (second operand):");
-    operand2 = int.Parse(Console.ReadLine()); //parse to Integer 
+    operand2 = ValidateOperandInput(); //int.Parse(Console.ReadLine()); //parse to Integer 
 
     Console.WriteLine("Please, enter a valid operator symbol:");
     Console.WriteLine("'+', '-', '*', '/'");
@@ -85,6 +85,86 @@ finally
 }
 
 Console.ReadKey(); //Esperar por user input
+
+/////////////// part 21.5
+
+// Let a specific amount of tries on Operand for user input 
+static int ValidateOperandInput()
+{
+    int Counter = 1;
+    const int maxTries = 5;
+    string userInput = string.Empty; // for user input
+
+    try
+    {
+        
+        do
+        {
+            userInput = Console.ReadLine();
+
+            //when input is incorrect, increment Counter
+            if(int.TryParse(userInput, out int i)) 
+            /*
+            Converts the string representation of a number to its 32-bit signed integer equivalent. 
+                1st arg -> string
+                    String? s
+                2nd arg -> int output
+                    'out' -> allows for the converted interger value to be passed out to the calling method
+                    through the relevant parameter.
+
+            Returns true / false -> whether the conversion succeeded.
+            'i' can be returned, it's the value now converted to an integer
+            */
+            {
+                return i; // if true, return the valid converted user input 'string' as 'int'
+            }
+            else
+            {
+                // write attempt warning to screen
+                WriteAttemptWarningToScreen(Counter);
+            }
+            Counter++;
+        }
+        while(Counter < maxTries);
+
+        //out here, tue user has had 4 attempts at entering valid data
+        //handle exception if input at 5th attempt is invalid
+
+        userInput = Console.ReadLine();
+        int operand = int.Parse(userInput); //Convert string to int
+
+        return operand;
+    }
+    catch (FormatException ex)
+    {
+        Logger.Log(ex, LogType.Verbose);
+        throw; // throw the exception up the stack
+        // So that the Main method can handle the exception
+
+        /* 
+        'throws' allows us to throw an existing cougth exception obj up the stack
+        without modifying the exception obj.
+
+        For example; when the developer wishes to handle the exception in a
+        method and also throw the excep. up the stack to be also handled 
+        by a method further up the stack.
+        
+        */
+    }
+
+
+}
+
+static void WriteAttemptWarningToScreen(int count)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.Write($"(You have made {count} attempt{(count == 1? "": "s")})"); //ternary operator
+    Console.ResetColor();
+    Console.WriteLine("Please try again.");
+}
+
+///////////////
+
 
 //private?
 static int Calculate(int operand1, int operand2, char operatorSymbol) //int value of operation 
