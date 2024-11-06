@@ -57,6 +57,11 @@ catch (OverflowException ex) //Entering out of range values for Int datatypes
     Logger.Log(ex, LogType.Verbose);
     WriteExceptionMessageToScreen($"The value for an operand  is out of range (i.e. not between {Int32.MinValue} and {Int32.MaxValue})");
 }
+catch (BlankUserInputException ex) 
+{
+    Logger.Log(ex, LogType.Verbose);
+    WriteExceptionMessageToScreen("A field was left blank.");
+}
 catch (ArithmeticException ex)
 {
     //Console.Clear(); //Clear Console to display Error Msg
@@ -131,9 +136,17 @@ static int ValidateOperandInput()
         //handle exception if input at 5th attempt is invalid
 
         userInput = Console.ReadLine();
+
+        CheckBlankUserInput(userInput); //catch blank input
+
         int operand = int.Parse(userInput); //Convert string to int
 
         return operand;
+    }
+    catch(BlankUserInputException ex)
+    {
+        Logger.Log(ex, LogType.Basic); // send it to Logger
+        throw; //throw excep up the stack (handled in the main method)
     }
     catch (FormatException ex)
     {
@@ -239,6 +252,14 @@ static void WriteArgumentExceptionToScreen(ArgumentException ex)
         errorMessage = "A value of 0 was entered for the 2nd operand. This value cannot be 0 when executing a divide operation.";
     }
     WriteExceptionMessageToScreen(errorMessage);
+}
+
+
+//integrating custom exception within this method:
+static void CheckBlankUserInput(string userInput)
+{
+    if(String.IsNullOrWhiteSpace(userInput)) //using built-in method IsNullOrWitheSpace from 'String' class
+        throw new BlankUserInputException();
 }
 
 

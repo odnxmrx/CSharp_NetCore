@@ -10,7 +10,10 @@ public class BlankUserInputException : Exception
     {
 
     }
-    public BlankUserInputException(string? message)
+
+    //making sure the args. passed to our constructors, are passed down to the base class
+    // that's why we need ':base()' with appropiate params. separated by commas.
+    public BlankUserInputException(string? message):base(message)
     {
 
     }
@@ -20,8 +23,6 @@ public class BlankUserInputException : Exception
 
     }
 
-    //making sure the args. passed to our constructors, are passed down to the base class
-    // that's why we need ':base()' with appropiate params. separated by commas.
     public BlankUserInputException(SerializationInfo info, StreamingContext context):base(info, context)
     {
         /*
