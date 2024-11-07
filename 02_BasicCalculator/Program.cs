@@ -25,7 +25,7 @@ try
 
     Console.WriteLine("Please, enter a valid operator symbol:");
     Console.WriteLine("'+', '-', '*', '/'");
-    operatorSymbol = char.Parse(Console.ReadLine()); //convert to str to char
+    operatorSymbol = ValidateOperatorInput(); //char.Parse(Console.ReadLine()); //convert to str to char
 
     result = Calculate(operand1, operand2, operatorSymbol); //calling method
 
@@ -62,17 +62,17 @@ catch (BlankUserInputException ex)
     Logger.Log(ex, LogType.Verbose);
     WriteExceptionMessageToScreen("A field was left blank.");
 }
-catch (ArithmeticException ex)
-{
-    //Console.Clear(); //Clear Console to display Error Msg
-    Console.WriteLine();
-    Console.BackgroundColor = ConsoleColor.White;
-    Console.ForegroundColor = ConsoleColor.Red;
+// catch (ArithmeticException ex)
+// {
+//     //Console.Clear(); //Clear Console to display Error Msg
+//     Console.WriteLine();
+//     Console.BackgroundColor = ConsoleColor.White;
+//     Console.ForegroundColor = ConsoleColor.Red;
     
-    Console.WriteLine(ex.Message);
+//     Console.WriteLine(ex.Message);
     
-    Console.ResetColor();
-}
+//     Console.ResetColor();
+// }
 catch (FormatException ex)
 {
     Logger.Log(ex, LogType.Verbose);
@@ -92,6 +92,53 @@ finally
 Console.ReadKey(); //Esperar por user input
 
 /////////////// part 21.5
+
+static char ValidateOperatorInput()
+{
+    int counter = 1;
+    const int maxTries = 5;
+    string userInput = null;
+
+    try
+    {
+        do
+        {
+            userInput = Console.ReadLine();
+
+            //if user input is a valid char
+            if(char.TryParse(userInput, out char c) && c == '+' || c == '-' || c == '/' || c == '*')
+            {
+                return c;
+            }
+            else
+            {
+                WriteAttemptWarningToScreen(counter);
+            }
+            counter++;
+
+        } while (counter < maxTries);
+
+        userInput = Console.ReadLine();
+
+        CheckBlankUserInput(userInput); // Also validate blank entries
+        
+        char r = Char.Parse(userInput);
+
+        return r;
+        
+    }
+    catch (BlankUserInputException ex)
+    {
+        Logger.Log(ex, LogType.Basic);
+        throw;
+    }
+    catch (FormatException ex)
+    {
+        Logger.Log(ex, LogType.Basic);
+        throw;
+    }
+}
+
 
 // Let a specific amount of tries on Operand for user input 
 static int ValidateOperandInput()
@@ -175,7 +222,6 @@ static void WriteAttemptWarningToScreen(int count)
     Console.ResetColor();
     Console.WriteLine("Please try again.");
 }
-
 ///////////////
 
 
