@@ -7,7 +7,7 @@ public class Program
     public static void Main(string[] args)
     {
         LogDelegate logDelegate = new LogDelegate(LogTextToScreen);
-        Console.WriteLine("Hello, what's your name?");
+        Console.Write("Hello, please type your name: "); // or WriteLine
         
         var name = Console.ReadLine();
         
@@ -18,6 +18,6 @@ public class Program
     
     static void LogTextToScreen(string text)
     {
-        Console.WriteLine($"{DateTime.Now} {text}");
+        Console.WriteLine($"[{DateTime.Now}]: {text}");
     }
 }
