@@ -1,4 +1,4 @@
-namespace _01_Basics;
+namespace _01_Basics._01_Integers;
 
 public static class Constants
 {
