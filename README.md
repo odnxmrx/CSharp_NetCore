@@ -3,6 +3,12 @@
 This repository contains my `C#` projects. Its main porpuse is to practice and strengthen my understanding on this sophisticated language.
 As listed below:
 
+## Projects
+
+### 01 - Foundations
+
+This project includes several classes where fundamental topics are covered. Concept definitions and practical examples are included.
+
 ### 02 - Basic calculator
 
 This project is focused on try catch and error handling.
