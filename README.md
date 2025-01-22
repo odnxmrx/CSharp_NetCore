@@ -9,6 +9,14 @@ As listed below:
 
 This project includes several classes where fundamental topics are covered. Concept definitions and practical examples are included.
 
+#### 1.1 Integers
+
+Returning `integers` and `constants` values.
+
+#### 1.2 Methods
+
+Working with `Method` definition and passthrough methods.
+
 ### 02 - Basic calculator
 
 This project is focused on try catch and error handling.
