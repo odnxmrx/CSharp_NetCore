@@ -15,10 +15,8 @@ public class WhileLoopOne
         // Console.WriteLine($"valor de i en un incio: {i}");
         while (i <= n)
         {
-            // sumValue += (1 / n) + (1 / n + 1);
             sumValue += 1.0 / i;
             i++;
-            // Console.WriteLine($"valor de i despues: {i}");
         }
 
         return sumValue;
