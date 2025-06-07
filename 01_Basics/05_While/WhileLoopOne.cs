@@ -12,7 +12,7 @@ public class WhileLoopOne
         Console.WriteLine($"valor de n: {n}");
         double sumValue = 0d;
         int i = 1;
-        // Console.WriteLine($"valor de i en un incio: {i}");
+
         while (i <= n)
         {
             sumValue += 1.0 / i;
