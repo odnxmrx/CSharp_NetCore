@@ -44,3 +44,11 @@ $`\sum_{i=1}^{n}\frac{1}{(2\cdot i+1)^2}`$
 , where _n_ > 0.
 
 Use a _while_ statement to raise a number to the required power. Don't use _Math.Pow_ method. 
+
+#### 5. WhileLoopFive
+
+Implement the method to get the product of the sequence $`(1+^1/_{1^2})\cdot(1+^1/_{2^2})\cdot(1+^1/_{3^2})\cdot...\cdot(1+^1/_{n^2})`$:
+
+$`\prod_{i=1}^{n} 1+\frac{1}{i^2}`$
+
+, where _n_ > 0.
