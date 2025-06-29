@@ -52,3 +52,13 @@ Implement the method to get the product of the sequence $`(1+^1/_{1^2})\cdot(1+^
 $`\prod_{i=1}^{n} 1+\frac{1}{i^2}`$
 
 , where _n_ > 0.
+
+#### 6. WhileLoopSix
+
+Implement the method to sum the sequence elements $`^{-1}/_3+^1/_5+^{-1}/_{7}+...+^{(-1)^n}/_{(2\cdot n+1)}`$
+
+$`\sum_{i=1}^{n}\frac{(-1)^i}{2\cdot i + 1}`$
+
+, where _n_ > 0.
+
+Use a _while_ statement to raise a number to the required power. Don't use _Math.Pow_ method.
