@@ -11,12 +11,12 @@ public class PowerLoopTwo
     public static double SumSequenceElements(int n)
     {
         double sumValue = 0d;
-
-        int i = 1;
+        double i = 1;
+        int currentSign = 1;
 
         while (i <= n)
         {
-            int otherCount = 1;
+            /*int otherCount = 1;
 
             double numerator = -1;
 
@@ -24,12 +24,11 @@ public class PowerLoopTwo
             {
                 numerator *= -1;
                 otherCount++;
-            }
+            }*/
 
             double denominator = i * (i + 1);
-
-            sumValue += numerator / denominator;
-
+            sumValue += currentSign / denominator;
+            currentSign = -currentSign; // Invertir signo en iteracion
             i++;
         }
 
