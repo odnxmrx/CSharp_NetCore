@@ -16,16 +16,6 @@ public class PowerLoopTwo
 
         while (i <= n)
         {
-            /*int otherCount = 1;
-
-            double numerator = -1;
-
-            while ((i + 1) > otherCount)
-            {
-                numerator *= -1;
-                otherCount++;
-            }*/
-
             double denominator = i * (i + 1);
             sumValue += currentSign / denominator;
             currentSign = -currentSign; // Invertir signo en iteracion
